@@ -85,6 +85,61 @@ select round(52.124 , 2);
 
 select truncate(52.129 , 2);
 
+-- built in function
+
+select curdate(); -- to get current date
+
+select now(); -- to get current date with time
+
+select year(curdate());
+
+select year("2023-11-08");
+
+select day(curdate());
+
+select dayofweek(curdate());
+
+select dayofweek("2023-11-08");
+
+select last_day(curdate());
+
+select datediff("2024-07-31" , "2024-07-23");
+
+select datediff(last_day(curdate()) , curdate());
+
+-- formatting date
+select date_format(curdate() , "%Y");
+
+select date_format(curdate() , "%y");
+
+select date_format(curdate() , "%b");
+
+select date_format(curdate() , "%D");
+
+select date_format(curdate() , "%d");
+
+select date_format(curdate() , "%W");
+
+SELECT DATE_FORMAT(CURDATE(), '%w');
+
+select date_format(curdate() , "%a");
+
+select curdate();
+
+select date_format(curdate() , "%d %M %Y");
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
