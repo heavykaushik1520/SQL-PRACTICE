@@ -376,6 +376,438 @@ group by country
 having count(customerId) > 5
 order by count(customerId) desc ;
 
+-- PRACTICE QUESTION
+
+--  1 Select all columns for all customers:
+select * from Customers;
+
+-- 2 Select only the CustomerName and City columns:
+select Customername , city from Customers;
+
+-- 3 Select customers from Germany:
+select * from Customers where country = 'Germany';
+
+-- 4 Count the number of customers in the table:
+select count(customerId) from customers;
+
+-- 5 Find the distinct cities in the table:
+select distinct city from customers;
+
+-- 6 Select customers with PostalCode starting with '05':
+select * from Customers where PostalCode like '05%';
+
+-- 7 Select customers in ascending order of CustomerName:
+select customerName from customers order by CustomerName;
+
+-- 8 Find the number of customers in each country:
+select count(customerId) as number_of_customres , country 
+from customers 
+group by country;
+
+-- 9 select first five customers
+select * from customers limit 5;
+
+-- 10 Select the last 5 customers in reverse order:
+select * from Customers 
+order by CustomerId
+desc limit 5;
+
+-- 11 Find customers who live in the same city as 'Alfreds Futterkiste':
+select city from customers where customerName = 'Alfreds Futterkiste';
+select * from customers 
+where city = (select city from customers where customerName = 'Alfreds Futterkiste');
+
+select * from customers where city = 'berlin';
+
+-- 12 Update the city of 'Ernst Handel' to 'Vienna':
+SET SQL_SAFE_UPDATES = 0;
+update customers set city = 'Vienna' where city = 'Ernst Handel';
+
+-- 13 Delete the customer 'Centro comercial Moctezuma':
+delete from customers where customername = 'Centro comercial Moctezuma';
+
+-- 14 Select customers from cities starting with 'M':
+select * from customers where city like 'M%';
+
+-- 15 Find customers with 'de' in their CustomerName:
+select * from customers where customername like '%de%';
+
+-- 16 Select customers and replace 'UK' with 'United Kingdom' in the result:
+update customers set country = 'United Kingdom' where country = 'UK';
+
+SELECT CustomerID, CustomerName, ContactName, Address, City, PostalCode, 
+CASE WHEN Country = 'UK' THEN 'United Kingdom' ELSE Country END AS Country
+FROM Customers;
+
+-- 17 Find customers with postal codes containing '1':
+select * from customers where postalcode like '%1%';
+
+-- 18 Select customers whose contact name is not null:
+desc customers;
+select * from customers where contactName is not null;
+
+-- 19 Select all customers but display City in upper case:
+select 
+CustomerID, CustomerName, ContactName, Address, upper(city) as city ,PostalCode, Country 
+from customers ;
+
+-- 20 Select the CustomerName and Country of the first 10 customers ordered by CustomerID:
+select CustomerName, Country from customers 
+order by customerId 
+limit 10;
+
+-- 21 Select customers who are in the same country as 'The Big Cheese':
+select country from customers where customerName = 'The Big Cheese';
+
+select * from customers
+where country = (select country from customers where customerName = 'The Big Cheese') ;
+
+-- 22 Count the number of unique cities in each country:
+select count(distinct city) as uniqueCity 
+from customers 
+group by country;
+
+-- 23 Select customers whose names contain exactly 15 characters:
+select * from customers where length(customerName) = 15 ;
+
+-- 24 Find the average length of CustomerName for customers in 'USA':
+select avg(length(Customername)) as avgLength from customers where country = 'usa';
+
+-- 25 Select customers who have the same contact name as their customer name:
+select * from customers where customerName = contactname;
+
+-- 26 Find the second most common country:
+select count(customerId) , country from customers
+group by country 
+order by count(customerId) desc
+limit 1
+offset 1;
+
+-- 27 Find customers with no postal code:
+select * from customers where postalcode is null;
+
+-- 28 Select customers whose address contains the word 'Avenue':
+select * from customers where address like '%avenue%';
+
+-- 30 Find customers whose city ends with the letter 'e':
+select * from customers where city like '%e';
+
+-- 31 Find customers who live in the same postal code as 'Ana Trujillo Emparedados y helados':
+select * from customers 
+where postalCode = (select postalCode from customers where customerName = 'Ana Trujillo Emparedados y helados');
+
+-- 32 Select customers who live in cities that appear more than once:
+select count(customerId) , city from customers
+group by city
+having count(customerId) > 1;
+
+select * from customers where city in (select city from customers
+group by city
+having count(customerId) > 1);
+
+-- 33 Select customers and display their PostalCode in reverse order:
+select * from customers order by postalcode desc;
+
+-- 35 Select customers whose CustomerName is the same when reversed:
+select * from customers where customername = reverse(customername);
+
+
+-- 36 Find customers in countries with exactly 6 characters:
+select * from customer where length(country) = 6;
+
+-- 37 Select customers with 'A' as the second letter in their CustomerName:
+select * from customers where customername like '_a%';
+
+-- 38 Find the longest CustomerName:
+select max(length(customerName)) from customers;
+
+select * from customers where length(customerName) = (select max(length(customerName)) from customers);
+
+-- 39 Select customers whose ContactName contains a hyphen ('-'):
+select * from customers where contactname like '%-%';
+
+-- 26 / 07 / 2024
+use practice;
+
+show tables;
+
+create table user(
+uid int primary key ,
+name varchar(20));
+
+create table product(pid int primary key ,
+name varchar(20) ,
+price int);
+
+create table ordered(
+oid int primary key ,
+pid int ,
+uid int ,
+foreign key (pid) references product(pid) ,
+foreign key (uid) references user(uid)
+);
+
+-- Inserting data into the user table
+INSERT INTO user (uid, name) VALUES
+(1, 'Alice'),
+(2, 'Bob'),
+(3, 'Charlie'),
+(4, 'David'),
+(5, 'Eve'),
+(6, 'Frank'),
+(7, 'Grace'),
+(8, 'Hannah'),
+(9, 'Ivy'),
+(10, 'Jack'),
+(11, 'Ken'),
+(12, 'Liam'),
+(13, 'Mona'),
+(14, 'Nina'),
+(15, 'Oscar');
+
+-- Inserting data into the product table
+INSERT INTO product (pid, name, price) VALUES
+(1, 'Laptop', 1000),
+(2, 'Smartphone', 500),
+(3, 'Tablet', 300),
+(4, 'Monitor', 150),
+(5, 'Keyboard', 50),
+(6, 'Mouse', 25),
+(7, 'Printer', 200),
+(8, 'Camera', 600),
+(9, 'Speaker', 100),
+(10, 'Headphones', 75),
+(11, 'Microphone', 120),
+(12, 'Charger', 20),
+(13, 'Hard Drive', 80),
+(14, 'SSD', 150),
+(15, 'RAM', 90);
+
+-- Inserting data into the orders table
+INSERT INTO ordered (oid, pid, uid) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 3, 3),
+(4, 4, 4),
+(5, 5, 5),
+(6, 6, 6),
+(7, 7, 7),
+(8, 8, 8),
+(9, 9, 9),
+(10, 10, 10),
+(11, 11, 11),
+(12, 12, 12),
+(13, 13, 13),
+(14, 14, 14),
+(15, 15, 15);
+
+-- 1 Select all users
+select * from user;
+
+-- 2 Select all products
+select * from product;
+
+-- select all ordered
+select * from ordered;
+
+-- 4 SELECT name FROM user;
+select name from user;
+
+-- 5 Select the name and price of all products
+select name , price from product;
+
+-- 6 Select user names and corresponding order IDs
+select name from user where uid in (select uid from ordered);
+
+-- 8 Select orders where user ID is 1
+select * from ordered where uid = 1;
+
+-- 9 select products price greater than 100
+select * from product where price > 100 ;
+
+-- 10 Count the number of users
+select count(*) from user;
+
+-- 11 find the average price of product
+select avg(price) from product;
+
+-- 12 Find the total number of orders
+select count(oid) from ordered;
+
+-- 13 Find the user who has made the most orders
+select count(oid) ,uid from ordered
+group by uid
+order by count(oid) desc
+limit 1;
+
+-- 14 Find the product with the highest price
+select max(price) from product;
+select name from product where price =(select max(price) from product);
+
+select * from product 
+order by price 
+desc limit 1;
+
+-- 15 Find the product with the lowest price
+select * from product order by price limit 1;
+
+-- 16 Select the names of users who have placed an order
+select uid from ordered;
+
+select name from user where uid in (select uid from ordered);
+
+-- 17 Select the names of products that have been ordered
+select pid from ordered;
+select name from product where pid in (select pid from ordered);
+
+-- 18 Select the names and prices of products ordered by user ID 1
+select pid from ordered where uid = 1;
+select name, price from product where pid = (select pid from ordered where uid = 1);
+
+
+
+-- 19 Select the order IDs and corresponding user names where product ID is 2
+select pid from product where pid = 2;
+
+-- 27 Find the order that contains the maximum number of products
+select count(pid) , oid 
+from ordered
+group by oid
+order by count(pid) desc
+limit 1;
+
+-- 30 more
+-- 1 count the number of orders per user
+select uid , count(oid) as no_of_orders from ordered
+group by uid;
+
+-- 2 Count the number of orders per product
+select pid , count(*) as no_of_orders from ordered group by pid;
+
+-- 3 Sum of product prices per user
+SELECT uid, SUM((SELECT price FROM product WHERE pid = orders.pid)) as total_spent 
+FROM orders GROUP BY uid;
+
+
+
+-- 4 
+
+-- 7 Count of different users who ordered each product
+
+select count(uid) from user;
+select pid , count((select count(uid) from user)) as uid  from product
+group by pid;
+
+select pid ,count(distinct uid) from ordered group by pid;
+
+
+-- 8 count Total number of products ordered per user
+select uid , count(pid) as orderedProduct from ordered group by uid;
+
+-- 21 Select users who have made more than 3 orders
+select uid , count(distinct oid) from ordered 
+group by uid
+having count(oid) > 3;
+
+-- 23 Select the number of users who have ordered products costing more than the average product price
+select avg(price) from product;
+select count(pid) from product where price > (select avg(price) from product);
+
+SELECT COUNT(DISTINCT uid) FROM ordered WHERE pid IN (
+    SELECT pid FROM product WHERE price > (SELECT AVG(price) FROM product)
+);
+
+-- 24 Select the total number of orders for products with price less than 100
+select price from product ;
+
+select pid from product where price < 100 ;
+select count(*) from ordered where pid in (select pid from product where price < 100);
+
+-- 25 Select the user IDs of users who have ordered the cheapest product
+select pid from product order by price asc limit 1;
+
+select uid from ordered where pid = (select pid from product order by price asc limit 1);
+
+-- 26 Select the product IDs of products ordered by the user with the most orders
+SELECT pid FROM ordered WHERE uid = (
+    SELECT uid FROM (
+        SELECT uid, COUNT(*) as order_count FROM orders GROUP BY uid
+    ) as subquery ORDER BY order_count DESC LIMIT 1
+);
+
+
+
+
+
+-- 27 Select the user names of users who have ordered a product named 'Laptop'
+select pid from product where name = 'laptop';
+select uid from ordered where pid = (select pid from product where name = 'laptop');
+select name from user where uid in (select uid from ordered where pid = (select pid from product where name = 'laptop'));
+
+
+ -- 28 Select the product names of products ordered by user ID 2
+select pid from ordered where uid = 2;
+
+select name from product where pid in (select pid from ordered where uid = 2);
+
+SELECT name FROM product WHERE pid IN (
+    SELECT pid FROM ordered WHERE uid = 2
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
