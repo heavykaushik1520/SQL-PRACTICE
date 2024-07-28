@@ -2,53 +2,108 @@ use school;
 
 show tables;
 
-select * from stud_info;
+SELECT 
+    *
+FROM
+    stud_info;
 
-select * from students;
+SELECT 
+    *
+FROM
+    students;
 desc students;
 
 -- update query use to update data from table
-update students 
-set name = 'charlie' 
-where id = 101;
+UPDATE students 
+SET 
+    name = 'charlie'
+WHERE
+    id = 101;
 
 SET SQL_SAFE_UPDATES = 0;
 
-update students 
-set class = 'Eleventh';
+UPDATE students 
+SET 
+    class = 'Eleventh';
 
-select * from students;
+SELECT 
+    *
+FROM
+    students;
 
-delete from students where name = 'charlie';
+DELETE FROM students 
+WHERE
+    name = 'charlie';
 
-select * from students;
+SELECT 
+    *
+FROM
+    students;
 
-delete from students; -- delete all data from table
+DELETE FROM students; -- delete all data from table
 
-drop table students; -- to drop whole table with structure
+drop table students;-- to drop whole table with structure
 
---  aggregate function
-select * from students where id = (select min(id) from students);
+SELECT 
+    *
+FROM
+    students
+WHERE
+    id = (SELECT 
+            MIN(id)
+        FROM
+            students);
 
-select * from students where id = (select max(id) from students);
+SELECT 
+    *
+FROM
+    students
+WHERE
+    id = (SELECT 
+            MAX(id)
+        FROM
+            students);
 
-select * from students;
+SELECT 
+    *
+FROM
+    students;
 
 -- alias 
-select min(id) as minId from students; -- imp -> as always comes before table name
+SELECT 
+    MIN(id) AS minId
+FROM
+    students;-- imp -> as always comes before table name
 
-select max(id) as maxId from students ; 
+SELECT 
+    MAX(id) AS maxId
+FROM
+    students;
 
 -- group by
-select count(id) as minId , blood_group from students group by blood_group;
+SELECT 
+    COUNT(id) AS minId, blood_group
+FROM
+    students
+GROUP BY blood_group;
 
 -- count
-select count(id) as minId , blood_group from students group by blood_group;
+SELECT 
+    COUNT(id) AS minId, blood_group
+FROM
+    students
+GROUP BY blood_group;
 
-select count(distinct blood_group) from students;
+SELECT 
+    COUNT(DISTINCT blood_group)
+FROM
+    students;
 
 -- sum()
-select sum(id) from students;
+SELECT 
+    SUM(id)
+FROM
+    students;
 
 CREATE TABLE Products (
     ProductID INT PRIMARY KEY,
@@ -56,7 +111,7 @@ CREATE TABLE Products (
     SupplierID INT,
     CategoryID INT,
     Unit VARCHAR(255),
-    Price DECIMAL(10, 2)
+    Price DECIMAL(10 , 2 )
 );
 
 INSERT INTO Products (ProductID, ProductName, SupplierID, CategoryID, Unit, Price) VALUES
@@ -66,20 +121,48 @@ INSERT INTO Products (ProductID, ProductName, SupplierID, CategoryID, Unit, Pric
 (4, 'Chef Anton\'s Cajun Seasoning', 2, 2, '48 - 6 oz jars', 22.00),
 (5, 'Chef Anton\'s Gumbo Mix', 2, 2, '36 boxes', 21.35);
 
-SELECT AVG(Price)
-FROM Products
-WHERE CategoryID = 1;
+SELECT 
+    AVG(Price)
+FROM
+    Products
+WHERE
+    CategoryID = 1;
 
-select avg(price) as average_price
-from products;
+SELECT 
+    AVG(price) AS average_price
+FROM
+    products;
 
-select * from Products where price > (select avg(price) from products);
+SELECT 
+    *
+FROM
+    Products
+WHERE
+    price > (SELECT 
+            AVG(price)
+        FROM
+            products);
 
-select avg(price) as averagePrice , CategoryID from Products group by CategoryID;
+SELECT 
+    AVG(price) AS averagePrice, CategoryID
+FROM
+    Products
+GROUP BY CategoryID;
 
-select * from Products where ProductName like 'c%';
+SELECT 
+    *
+FROM
+    Products
+WHERE
+    ProductName LIKE 'c%';
 
-select * from Products where ProductName like 'c%' or ProductName like 'a%';
+SELECT 
+    *
+FROM
+    Products
+WHERE
+    ProductName LIKE 'c%'
+        OR ProductName LIKE 'a%';
 
 CREATE TABLE Student (
     StudentID INT PRIMARY KEY,
@@ -88,7 +171,7 @@ CREATE TABLE Student (
     Age INT,
     Gender CHAR(1),
     Major VARCHAR(100),
-    GPA DECIMAL(3, 2),
+    GPA DECIMAL(3 , 2 ),
     EnrollmentDate DATE,
     Email VARCHAR(100),
     PhoneNumber VARCHAR(15)
@@ -116,27 +199,79 @@ INSERT INTO Student (StudentID, FirstName, LastName, Age, Gender, Major, GPA, En
 (19, 'Quinn', 'Young', 21, 'F', 'Education', 3.7, '2021-09-01', 'quinn.young@example.com', '123-456-7908'),
 (20, 'Ryan', 'King', 24, 'M', 'Environmental Science', 3.4, '2019-09-01', 'ryan.king@example.com', '123-456-7909');
 
-select * from student;
+SELECT 
+    *
+FROM
+    student;
 
-select * from student where major in('Mathematics' , 'physics' , 'chemistry');
+SELECT 
+    *
+FROM
+    student
+WHERE
+    major IN ('Mathematics' , 'physics', 'chemistry');
 
-select * from student where major not in('Mathematics' , 'physics');
+SELECT 
+    *
+FROM
+    student
+WHERE
+    major NOT IN ('Mathematics' , 'physics');
 
 -- between 
-select * from student where studentId between 1 and 10 ;
+SELECT 
+    *
+FROM
+    student
+WHERE
+    studentId BETWEEN 1 AND 10;
 
-select * from student where studentId not between 1 and 10;
+SELECT 
+    *
+FROM
+    student
+WHERE
+    studentId NOT BETWEEN 1 AND 10;
 
-select * from student where studentId between 1 and 10 AND major in('Mathematics' , 'Physics');
+SELECT 
+    *
+FROM
+    student
+WHERE
+    studentId BETWEEN 1 AND 10
+        AND major IN ('Mathematics' , 'Physics');
 
-select count(studentid) ,gpa  from student group by gpa;
+SELECT 
+    COUNT(studentid), gpa
+FROM
+    student
+GROUP BY gpa;
 
-select * from student where studentId between 2 and 12 order by studentId desc;
+SELECT 
+    *
+FROM
+    student
+WHERE
+    studentId BETWEEN 2 AND 12
+ORDER BY studentId DESC;
 
-select * from student where EnrollMentDate between '2022-09-01' and '2023-09-01' ;
+SELECT 
+    *
+FROM
+    student
+WHERE
+    EnrollMentDate BETWEEN '2022-09-01' AND '2023-09-01';
 
 -- alias
-select firstname from student where StudentId in (select studentId from student) ;
+SELECT 
+    firstname
+FROM
+    student
+WHERE
+    StudentId IN (SELECT 
+            studentId
+        FROM
+            student);
 
 CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY,
@@ -623,7 +758,12 @@ select name from user where uid in (select uid from ordered);
 select * from ordered where uid = 1;
 
 -- 9 select products price greater than 100
-select * from product where price > 100 ;
+SELECT 
+    *
+FROM
+    product
+WHERE
+    price > 100 ;
 
 -- 10 Count the number of users
 select count(*) from user;
@@ -753,6 +893,426 @@ select name from product where pid in (select pid from ordered where uid = 2);
 SELECT name FROM product WHERE pid IN (
     SELECT pid FROM ordered WHERE uid = 2
 );
+
+-- ------------------------------------------------------------------------------------------------
+use practice;
+
+CREATE TABLE Categories (
+    CategoryID INT PRIMARY KEY,
+    CategoryName VARCHAR(255) NOT NULL,
+    Description TEXT
+);
+
+INSERT INTO Categories (CategoryID, CategoryName, Description) VALUES
+(1, 'Beverages', 'Soft drinks, coffees, teas, beers, and ales'),
+(2, 'Condiments', 'Sweet and savory sauces, relishes, spreads, and seasonings'),
+(3, 'Confections', 'Desserts, candies, and sweet breads'),
+(4, 'Dairy Products', 'Cheeses'),
+(5, 'Grains/Cereals', 'Breads, crackers, pasta, and cereal'),
+(6, 'Meat/Poultry', 'Prepared meats'),
+(7, 'Produce', 'Dried fruit and bean curd'),
+(8, 'Seafood', 'Seaweed and fish');
+
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(255) NOT NULL,
+    SupplierID INT NOT NULL,
+    CategoryID INT,
+    Unit VARCHAR(255) NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+);
+
+INSERT INTO Products 
+(ProductID, ProductName, SupplierID, CategoryID, Unit, Price) 
+VALUES
+(1, 'Chais', 1, 1, '10 boxes x 20 bags', 18.00),
+(2, 'Chang', 1, 1, '24 - 12 oz bottles', 19.00),
+(3, 'Aniseed Syrup', 1, 2, '12 - 550 ml bottles', 10.00),
+(4, 'Chef Anton''s Cajun Seasoning', 2, 2, '48 - 6 oz jars', 22.00),
+(5, 'Chef Anton''s Gumbo Mix', 2, 2, '36 boxes', 21.35),
+(6, 'Grandma''s Boysenberry Spread', 3, 2, '12 - 8 oz jars', 25.00),
+(7, 'Uncle Bob''s Organic Dried Pears', 3, 7, '12 - 1 lb pkgs.', 30.00),
+(8, 'Northwoods Cranberry Sauce', 3, 2, '12 - 12 oz jars', 40.00),
+(9, 'Mishi Kobe Niku', 4, 6, '18 - 500 g pkgs.', 97.00),
+(10, 'Ikura', 4, 8, '12 - 200 ml jars', 31.00),
+(11, 'Queso Cabrales', 5, 4, '1 kg pkg.', 21.00),
+(12, 'Queso Manchego La Pastora', 5, 4, '10 - 500 g pkgs.', 38.00),
+(13, 'Konbu', 6, 8, '2 kg box', 6.00),
+(14, 'Tofu', 6, 7, '40 - 100 g pkgs.', 23.25),
+(15, 'Genen Shouyu', 6, 2, '24 - 250 ml bottles', 15.50),
+(16, 'Pavlova', 7, 3, '32 - 500 g boxes', 17.45),
+(17, 'Alice Mutton', 7, 6, '20 - 1 kg tins', 39.00),
+(18, 'Carnarvon Tigers', 7, 8, '16 kg pkg.', 62.50),
+(19, 'Teatime Chocolate Biscuits', 8, 3, '10 boxes x 12 pieces', 9.20),
+(20, 'Sir Rodney''s Marmalade', 8, 3, '30 gift boxes', 81.00),
+(21, 'Sir Rodney''s Scones', 8, 3, '24 pkgs. x 4 pieces', 10.00),
+(22, 'Gustaf''s Knäckebröd', 9, 5, '24 - 500 g pkgs.', 21.00),
+(23, 'Tunnbröd', 9, 5, '12 - 250 g pkgs.', 9.00),
+(24, 'Guaraná Fantástica', 10, 1, '12 - 355 ml cans', 4.50),
+(25, 'NuNuCa Nuß-Nougat-Creme', 11, 3, '20 - 450 g glasses', 14.00),
+(26, 'Gumbär Gummibärchen', 11, 3, '100 - 250 g bags', 31.23),
+(27, 'Schoggi Schokolade', 11, 3, '100 - 100 g pieces', 43.90),
+(28, 'Rössle Sauerkraut', 12, 7, '25 - 825 g cans', 45.60),
+(29, 'Thüringer Rostbratwurst', 12, 6, '50 bags x 30 sausgs.', 123.79),
+(30, 'Nord-Ost Matjeshering', 13, 8, '10 - 200 g glasses', 25.89),
+(31, 'Gorgonzola Telino', 14, 4, '12 - 100 g pkgs', 12.50),
+(32, 'Mascarpone Fabioli', 14, 4, '24 - 200 g pkgs.', 32.00),
+(33, 'Geitost', 15, 4, '500 g', 2.50),
+(34, 'Sasquatch Ale', 16, 1, '24 - 12 oz bottles', 14.00),
+(35, 'Steeleye Stout', 16, 1, '24 - 12 oz bottles', 18.00),
+(36, 'Inlagd Sill', 17, 8, '24 - 250 g jars', 19.00),
+(37, 'Gravad lax', 17, 8, '12 - 500 g pkgs.', 26.00),
+(38, 'Côte de Blaye', 18, 1, '12 - 75 cl bottles', 263.50),
+(39, 'Chartreuse verte', 18, 1, '750 cc per bottle', 18.00),
+(40, 'Boston Crab Meat', 19, 8, '24 - 4 oz tins', 18.40),
+(41, 'Jack''s New England Clam Chowder', 19, 8, '12 - 12 oz cans', 9.65),
+(42, 'Singaporean Hokkien Fried Mee', 20, 5, '32 - 1 kg pkgs.', 14.00),
+(43, 'Ipoh Coffee', 20, 1, '16 - 500 g tins', 46.00),
+(44, 'Gula Malacca', 20, 2, '20 - 2 kg bags', 19.45),
+(45, 'Røgede sild', 21, 8, '1k pkg.', 9.50),
+(46, 'Spegesild', 21, 8, '4 - 450 g glasses', 12.00),
+(47, 'Zaanse koeken', 22, 3, '10 - 4 oz boxes', 9.50),
+(48, 'Chocolade', 22, 3, '10 pkgs.', 12.75),
+(49, 'Maxilaku', 23, 3, '24 - 50 g pkgs.', 20.00),
+(50, 'Valkoinen suklaa', 23, 3, '12 - 100 g bars', 16.25),
+(51, 'Manjimup Dried Apples', 24, 7, '50 - 300 g pkgs.', 53.00),
+(52, 'Filo Mix', 24, 5, '16 - 2 kg boxes', 7.00),
+(53, 'Perth Pasties', 24, 6, '48 pieces', 32.80),
+(54, 'Tourtière', 25, 6, '16 pies', 7.45),
+(55, 'Pâté chinois', 25, 6, '24 boxes x 2 pies', 24.00),
+(56, 'Gnocchi di nonna Alice', 26, 5, '24 - 250 g pkgs.', 38.00),
+(57, 'Ravioli Angelo', 26, 5, '24 - 250 g pkgs.', 19.50),
+(58, 'Escargots de Bourgogne', 27, 8, '24 pieces', 13.25),
+(59, 'Raclette Courdavault', 28, 4, '5 kg pkg.', 55.00),
+(60, 'Camembert Pierrot', 28, 4, '15 - 300 g rounds', 34.00),
+(61, 'Sirop d''érable', 29, 2, '24 - 500 ml bottles', 28.50),
+(62, 'Tarte au sucre', 29, 3, '48 pies', 49.30),
+(63, 'Vegie-spread', 7, 2, '15 - 625 g jars', 43.90),
+(64, 'Wimmers gute Semmelknödel', 12, 5, '20 bags x 4 pieces', 33.25),
+(65, 'Louisiana Fiery Hot Pepper Sauce', 2, 2, '32 - 8 oz bottles', 21.05),
+(66, 'Louisiana Hot Spiced Okra', 2, 2, '24 - 8 oz jars', 17.00),
+(67, 'Laughing Lumberjack Lager', 16, 1, '24 - 12 oz bottles', 14.00),
+(68, 'Scottish Longbreads', 8, 3, '10 boxes x 8 pieces', 12.50),
+(69, 'Gudbrandsdalsost', 15, 4, '10 kg pkg.', 36.00),
+(70, 'Outback Lager', 7, 1, '24 - 355 ml bottles', 15.00),
+(71, 'Fløtemysost', 15, 4, '10 - 500 g pkgs.', 21.50),
+(72, 'Mozzarella di Giovanni', 14, 4, '24 - 200 g pkgs.', 34.80),
+(73, 'Röd Kaviar', 17, 8, '24 - 150 g jars', 15.00),
+(74, 'Longlife Tofu', 4, 7, '5 kg pkg.', 10.00),
+(75, 'Rhönbräu Klosterbier', 12, 1, '24 - 0.5 l bottles', 7.75),
+(76, 'Lakkalikööri', 23, 1, '500 ml', 18.00),
+(77, 'Original Frankfurter grüne Soße', 12, 2, '12 boxes', 13.00);
+
+
+select * from categories;
+
+select * from products;
+
+-- 1 Select all products with their category names:
+select products.productName , categories.categoryName
+from products join categories on
+products.categoryId = categories.categoryId;
+
+-- 2 Select product names and their prices for products in the 'Beverages' category:
+select p.productName , p.price
+from products p join categories c 
+on p.categoryId = c.categoryId
+where c.categoryName = "Beverages";
+
+
+-- 3 Count the number of products in each category:
+select c.categoryName , count(p.productId)  as total_products
+from products p join categories c
+on p.categoryId = c.categoryId
+group by c.categoryName;
+
+-- 4 List all categories that have products:
+select c.categoryName , count(p.productId)
+from products p join categories c
+on p.categoryId = c.categoryId
+group by categoryName;
+
+select distinct c.categoryName 
+from categories c join products p 
+on p.categoryId = c.categoryId;
+
+-- 5 Select the product names and categories for products with a price greater than 20:
+SELECT p.productname , c.categoryname , p.price 
+from products p join categories c
+on p.categoryId = c.categoryId
+where p.price > 20;
+
+--  Intermediate Level Queries
+-- 6 Find the average price of products in each category:
+select c.categoryName , avg(p.price) as avgPrice
+from Products p join categories c
+on p.categoryId = c.categoryId
+group by c.categoryName;
+
+-- 7 Select the top 3 most expensive products and their categories:
+select * from
+products p join categories c
+on p.categoryId = c.categoryId
+order by p.price desc 
+limit 3;
+
+-- 8 List all categories along with the number of products and the total price of products in each category:
+select c.categoryName , count(distinct p.productId) as noOfProduct , sum(p.price) as totalPrice
+from products p join categories c
+on p.categoryId = c.categoryId
+group by c.categoryName;
+
+-- 9 Select products and their categories where the unit contains 'box':
+select p.productName , c.categoryName , p.unit
+from products p join categories c
+on p.categoryId = c.categoryId
+where unit like '%box%';
+
+-- 10 Select products, their categories, 
+-- and the difference between their price and the average price of their category:
+select p.productName , c.categoryName , p.price , p.Price - avg(p.price) over (Partition by c.categoryName) as priceDiff
+from products p join categories c 
+on p.categoryId = c.categoryId;
+
+-- 11 Find the category with the highest average product price:
+SELECT 
+    AVG(p.price), c.categoryName
+FROM
+    products p
+        JOIN
+    categories c ON p.categoryId = c.categoryId
+GROUP BY c.categoryName
+ORDER BY AVG(p.price) DESC
+LIMIT 1;
+
+-- 12 Select categories that have more than 5 products:
+SELECT 
+    count(distinct p.productId) as productCount ,c.categoryName 
+FROM
+    products p
+        JOIN
+    categories c ON p.categoryId = c.categoryId
+group by c.categoryName
+having count(distinct p.productId) > 5
+order by productCount ;
+
+-- 13 Select products, their categories, and rank them by price within their category:
+select p.productName , c.categoryName , p.price,
+RANK() OVER (PARTITION BY c.CategoryName ORDER BY p.Price DESC) AS PriceRank
+from products p join categories c
+on p.categoryId = c.categoryId;
+
+use practice;
+-- 14 List categories and the product with the highest price in each category:
+select max(price) from 
+products p2 join categories c2
+on p2.categoryId = c2.categoryId;
+
+SELECT 
+    c.categoryName, p.productName , p.price
+FROM
+    products p
+        JOIN
+    categories c ON p.categoryId = c.categoryId
+WHERE
+    p.price = (SELECT 
+            MAX(price)
+        FROM
+            products p2
+                JOIN
+            categories c2 ON p2.categoryId = c2.categoryId);
+
+
+-- 15 Select the categories that have a total product price of more than 500:
+select c.categoryName , sum(p.price )
+from products p join categories c
+on p.categoryId = c.categoryId
+group by c.categoryName
+having sum(p.price) > 500;
+
+SELECT c.CategoryName, SUM(p.Price) AS TotalPrice
+FROM Products p
+JOIN Categories c ON p.CategoryID = c.CategoryID
+GROUP BY c.CategoryName
+HAVING SUM(p.Price) > 500;
+
+-- 16 Find the category with the most products priced above the average price of all products:
+select c.categoryName 
+from products p join categories c
+on p.categoryId = c.categoryId
+where p.price > (
+select avg(p2.price) from products p2) 
+group by c.categoryName
+order by count(p.productId) desc
+limit 1 ;
+
+select avg(price) from products;
+
+-- --------------------------------
+SELECT 
+    c.CategoryName
+FROM
+    Products p
+        JOIN
+    Categories c ON p.CategoryID = c.CategoryID
+WHERE
+    p.Price > (SELECT 
+            AVG(p2.Price)
+        FROM
+            Products p2)
+GROUP BY c.CategoryName
+ORDER BY COUNT(p.ProductID) DESC
+LIMIT 1;
+
+
+-- 17 Select the products that belong to the categories with the highest and lowest average prices:
+WITH CategoryPrices AS (
+    SELECT c.CategoryID, c.CategoryName, AVG(p.Price) AS AvgPrice
+    FROM Categories c
+    JOIN Products p ON c.CategoryID = p.CategoryID
+    GROUP BY c.CategoryID, c.CategoryName
+),
+Extremes AS (
+    SELECT MIN(AvgPrice) AS MinPrice, MAX(AvgPrice) AS MaxPrice
+    FROM CategoryPrices
+)
+SELECT p.ProductName, c.CategoryName, p.Price
+FROM Products p
+JOIN Categories c ON p.CategoryID = c.CategoryID
+JOIN CategoryPrices cp ON c.CategoryID = cp.CategoryID
+JOIN Extremes e ON cp.AvgPrice = e.MinPrice OR cp.AvgPrice = e.MaxPrice; -- learn later
+
+-- 19 List the top 3 categories by total product price, including the total price:
+select c.categoryName, sum(p.price) as totalPrice
+from products p join categories c 
+on p.categoryId = c.categoryId
+group by c.categoryName
+order by totalPrice desc
+limit 3;
+
+-- 21 Select categories that have products with prices both below 10 and above 100:
+select c.categoryName 
+from categories c 
+join products p1 on c.categoryId = p1.categoryId and p1.price < 10
+join products p2 on c.categoryId = p2.categoryId and p2.price > 100
+group by c.categoryName;
+
+SELECT c.CategoryName
+FROM Categories c
+JOIN Products p1 ON c.CategoryID = p1.CategoryID AND p1.Price < 10
+JOIN Products p2 ON c.CategoryID = p2.CategoryID AND p2.Price > 100
+GROUP BY c.CategoryName;
+
+-- 22 List all products and their categories, including categories with no products:
+select c.categoryName , p.productName
+from products p left join categories c
+on  p.categoryId = c.categoryId
+order by c.categoryName;
+
+SELECT p.ProductName, c.CategoryName
+FROM Categories c
+LEFT JOIN Products p ON c.CategoryID = p.CategoryID;
+
+-- 23 Find the average price of products in categories that have more than 3 products with prices above 20:
+select avg(p.price) , c.categoryName 
+from products p join categories c 
+on p.categoryId = c.categoryId 
+where p.price > 20
+group by c.categoryName
+having (count(p.productId) > 3);
+
+-- 24 Select products in categories where the average product price is between 20 and 50:
+select avg(p.price) , c.categoryId from
+products p join categories c
+on p.categoryId = c.categoryId
+ 
+group by c.categoryId
+having avg(p.price) between 20 and 50 ;
+
+SELECT 
+    p.productName
+FROM
+    products p
+        JOIN
+    categories c ON p.categoryId = c.categoryId
+WHERE
+    c.categoryId IN (SELECT 
+             c.categoryId
+        FROM
+            products p
+                JOIN
+            categories c ON p.categoryId = c.categoryId
+        GROUP BY c.categoryId
+        HAVING AVG(p.price) BETWEEN 20 AND 50);
+        
+        
+-- 25 Select the category that has the second highest number of products:
+select c.categoryName as ctgName , count(p.productId) as products
+from products p join categories c
+on p.categoryId = c.categoryId 
+group by c.categoryName
+order by count(p.productId) desc
+limit 1
+offset 1;
+
+-- 26 List products along with their categories, and include the total number of products in each category:
+select  count(p.productId) , p.productName as productName , c.categoryName
+from products p 
+join categories c
+on p.categoryId = c.categoryId
+join products p2 on p2.categoryId = c.categoryId
+group by c.categoryId , p.productId;
+
+-- 30 Select products and their categories where the product's price is more than double the average price of their category:
+select p.productName , c.categoryName , p.price
+from products p join categories c
+on p.categoryId = c.categoryId
+where p.price > 2* (SELECT AVG(p2.Price) FROM Products p2 WHERE p2.CategoryID = p.CategoryID);
+
+use practice;
+
+-- 32 List products and their categories where the product's price is within 10% of the average price of their category:
+SELECT AVG(p2.Price) FROM Products p2 join products p on p2.CategoryID = p.CategoryID ;
+
+select p.productName , c.categoryName 
+from products p join categories c
+on p.categoryId = c.categoryId 
+where p.price
+between 0.9 * (SELECT AVG(p2.Price) FROM Products p2 join products p on p2.CategoryID = p.CategoryID)
+and
+1.1 * (SELECT AVG(p2.Price) FROM Products p2 join products p on p2.CategoryID = p.CategoryID);
+
+-- 41 Find the category with the highest variance in product prices:
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
