@@ -1568,13 +1568,61 @@ HAVING COUNT(o.OrderID) > (SELECT AVG(OrderCount) FROM (SELECT COUNT(OrderID) as
 
 -- 14 nested subqieries
 select customerName from customer
-where cutsomerId in(
+where customerId in(
 	select customerId from orderr 
     where productId in(
 		select productId
         from maal
         where price > 20)
-)
+);
+
+-- 15 self join
+SELECT 
+    c1.customerName, c2.customerName AS referrer
+FROM
+    customer c1
+        JOIN
+    customer c2 ON c1.contactName = c2.customerName;
+    
+SELECT 
+    c1.CustomerName, c2.CustomerName AS Referrer
+FROM
+    Customers c1
+        JOIN
+    Customers c2 ON c1.ContactName = c2.CustomerName;
+
+-- 29 union
+SELECT 
+    CustomerID, OrderDate, ProductName AS Product
+FROM
+    Orderr
+WHERE
+    ProductID = 1 
+UNION 
+SELECT 
+    CustomerID, OrderDate, ProductName AS Product
+FROM
+    Orderr
+WHERE
+    ProductID = 2;
+    
+-- 40 Join with Date Functions
+select c.customerName , year(o.orderdate) as orderYear , month(o.orderdate) as orderMonth
+from customer c join orderr o
+on c.customerId = o.customerId;
+
+-- 43 Join with Subquery in Select Clause
+select c.customerName , (select sum(quantity) 
+from orderr o 
+where o.customerId = c.customerId) as TotalQuantity
+from Customer c;
+
+
+
+
+
+
+
 
 
 

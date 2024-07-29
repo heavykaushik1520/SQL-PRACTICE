@@ -104,6 +104,70 @@ from emp employee inner join emp manager
 on employee.manager_id = manager.id;
 
 
+-- natural join
+-- no need of ON while using natural join
+select pname as patient , dname as doctor
+from doctor
+natural join patient;
+
+select * from doctor natural join patient;
+
+-- union => outer join
+select d.dname as doctor , p.pname as patient
+from doctor d left join patient p
+on d.did = p.pid
+union
+select d.dname as doctor , p.pname as patient
+from doctor d right join patient p
+on d.did = p.pid;
+
+
+desc doctor;
+
+-- equi joins
+create table sql_marks
+(id int primary key ,
+name varchar(20),
+marks int);
+
+create table java_marks
+(id int primary key ,
+name varchar(20),
+marks int);
+
+insert into sql_marks
+(id , name , marks)
+values
+(1 , "raj" , 88),
+(2 , 'rani' , 83),
+(3 , 'anikat' , 85);
+
+insert into java_marks
+(id , name , marks)
+values
+(1 , "raj" , 78),
+(2 , 'rani' , 73),
+(3 , 'anikat' , 75);
+
+select sql_marks.name , java_marks.name from sql_marks , java_marks 
+where sql_marks.marks > java_marks.marks;
+
+select sql_marks.name  from sql_marks , java_marks 
+where sql_marks.marks > java_marks.marks or sql_marks.marks  = java_marks.marks;
+
+drop table student;
+
+create table student
+(id int primary key ,
+name varchar(20) ,
+city varchar(20));
+
+create table marks
+(sid int ,
+sql_makrs int ,
+java_marks int ,
+constraint sid_fk foreign key(sid) references student(id));
+
 
 
 
