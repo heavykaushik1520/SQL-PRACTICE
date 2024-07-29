@@ -1343,6 +1343,253 @@ from products p
 join categories c on p.categoryId = c.categoryId;
 
 
+use practice;
+
+CREATE TABLE AGENTS
+(
+    AGENT_CODE CHAR(6) NOT NULL PRIMARY KEY, 
+    AGENT_NAME CHAR(40), 
+    WORKING_AREA CHAR(35), 
+    COMMISSION int, 
+    PHONE_NO CHAR(15), 
+    COUNTRY VARCHAR(25)
+);
+
+INSERT INTO AGENTS 
+(agent_code, agent_name, working_area, commission, phone_no, country)
+VALUES 
+('A007', 'Ramasundar', 'Bangalore', 0.15, '077-25814763', 'India'),
+('A003', 'Alex', 'London', 0.13, '075-12458969', 'UK'),
+('A008', 'Alford', 'New York', 0.12, '044-25874365', 'USA'),
+('A011', 'Ravi Kumar', 'Bangalore', 0.15, '077-45625874', 'India'),
+('A010', 'Santakumar', 'Chennai', 0.14, '007-22388644', 'India'),
+('A012', 'Lucida', 'San Jose', 0.12, '044-52981425', 'USA'),
+('A005', 'Anderson', 'Brisbane', 0.13, '045-21447739', 'Australia'),
+('A001', 'Subbarao', 'Bangalore', 0.14, '077-12346674', 'India'),
+('A002', 'Mukesh', 'Mumbai', 0.11, '029-12358964', 'India'),
+('A006', 'McDen', 'London', 0.15, '078-22255588', 'UK'),
+('A004', 'Ivan', 'Toronto', 0.15, '008-22544166', 'Canada'),
+('A009', 'Benjamin', 'Hampshire', 0.11, '008-22536178', 'UK');
+
+CREATE TABLE CUSTOMER
+(
+    CUST_CODE VARCHAR(6) NOT NULL PRIMARY KEY, 
+    CUST_NAME VARCHAR(40) NOT NULL, 
+    CUST_CITY CHAR(35), 
+    WORKING_AREA VARCHAR(35) NOT NULL, 
+    CUST_COUNTRY VARCHAR(20) NOT NULL, 
+    GRADE int, 
+    OPENING_AMT int NOT NULL, 
+    RECEIVE_AMT int NOT NULL, 
+    PAYMENT_AMT int NOT NULL, 
+    OUTSTANDING_AMT int NOT NULL, 
+    PHONE_NO int NOT NULL, 
+    AGENT_CODE CHAR(6) NOT NULL,
+    CONSTRAINT fk_agent_code FOREIGN KEY (AGENT_CODE) REFERENCES AGENTS (AGENT_CODE)
+);
+
+INSERT INTO CUSTOMER (CUST_CODE, CUST_NAME, CUST_CITY, WORKING_AREA, CUST_COUNTRY, GRADE, OPENING_AMT, RECEIVE_AMT, PAYMENT_AMT, OUTSTANDING_AMT, PHONE_NO, AGENT_CODE) VALUES
+('C00013', 'Holmes', 'London', 'London', 'UK', 2, 6000.00, 5000.00, 7000.00, 4000.00, '777-88888888', 'A003'),
+('C00001', 'Micheal', 'New York', 'New York', 'USA', 2, 3000.00, 5000.00, 2000.00, 6000.00, '111-22222222', 'A008'),
+('C00020', 'Albert', 'New York', 'New York', 'USA', 3, 5000.00, 7000.00, 6000.00, 6000.00, '111-33333333', 'A008'),
+('C00025', 'Ravindran', 'Bangalore', 'Bangalore', 'India', 2, 5000.00, 7000.00, 4000.00, 8000.00, '080-44444444', 'A011'),
+('C00024', 'Cook', 'London', 'London', 'UK', 2, 4000.00, 9000.00, 7000.00, 6000.00, '777-55555555', 'A006'),
+('C00015', 'Stuart', 'London', 'London', 'UK', 1, 6000.00, 8000.00, 3000.00, 11000.00, '777-66666666', 'A003'),
+('C00002', 'Bolt', 'New York', 'New York', 'USA', 3, 5000.00, 7000.00, 9000.00, 3000.00, '111-44444444', 'A008'),
+('C00018', 'Fleming', 'Brisbane', 'Brisbane', 'Australia', 2, 7000.00, 7000.00, 9000.00, 5000.00, '123-4567890', 'A005'),
+('C00021', 'Jacks', 'Brisbane', 'Brisbane', 'Australia', 1, 7000.00, 7000.00, 7000.00, 7000.00, '321-0987654', 'A005'),
+('C00019', 'Yearannaidu', 'Chennai', 'Chennai', 'India', 1, 8000.00, 7000.00, 7000.00, 8000.00, '044-55555555', 'A010'),
+('C00005', 'Sasikant', 'Mumbai', 'Mumbai', 'India', 1, 7000.00, 11000.00, 7000.00, 11000.00, '147-25896312', 'A002'),
+('C00007', 'Ramanathan', 'Chennai', 'Chennai', 'India', 1, 7000.00, 11000.00, 9000.00, 9000.00, '044-66666666', 'A010'),
+('C00022', 'Avinash', 'Mumbai', 'Mumbai', 'India', 2, 7000.00, 11000.00, 9000.00, 9000.00, '022-12345678', 'A002'),
+('C00004', 'Winston', 'Brisbane', 'Brisbane', 'Australia', 1, 5000.00, 8000.00, 7000.00, 6000.00, '789-4561230', 'A005'),
+('C00023', 'Karl', 'London', 'London', 'UK', 0, 4000.00, 6000.00, 7000.00, 3000.00, '777-99999999', 'A006'),
+('C00006', 'Shilton', 'Toronto', 'Toronto', 'Canada', 1, 10000.00, 7000.00, 6000.00, 11000.00, '416-5555555', 'A004'),
+('C00010', 'Charles', 'Hampshire', 'Hampshire', 'UK', 3, 6000.00, 4000.00, 5000.00, 5000.00, '023-3333333', 'A009'),
+('C00017', 'Srinivas', 'Bangalore', 'Bangalore', 'India', 2, 8000.00, 4000.00, 3000.00, 9000.00, '080-77777777', 'A007'),
+('C00012', 'Steven', 'San Jose', 'San Jose', 'USA', 1, 5000.00, 7000.00, 9000.00, 3000.00, '408-1234567', 'A012'),
+('C00008', 'Karolina', 'Toronto', 'Toronto', 'Canada', 1, 7000.00, 7000.00, 9000.00, 5000.00, '416-6666666', 'A004'),
+('C00003', 'Martin', 'Toronto', 'Toronto', 'Canada', 2, 8000.00, 7000.00, 7000.00, 8000.00, '416-7777777', 'A004'),
+('C00009', 'Ramesh', 'Mumbai', 'Mumbai', 'India', 3, 8000.00, 7000.00, 3000.00, 12000.00, '022-98765432', 'A002'),
+('C00014', 'Rangarappa', 'Bangalore', 'Bangalore', 'India', 2, 8000.00, 11000.00, 7000.00, 12000.00, '080-88888888', 'A001'),
+('C00016', 'Venkatpati', 'Bangalore', 'Bangalore', 'India', 2, 8000.00, 11000.00, 7000.00, 12000.00, '080-99999999', 'A007'),
+('C00011', 'Sundariya', 'Chennai', 'Chennai', 'India', 3, 7000.00, 11000.00, 7000.00, 11000.00, '044-77777777', 'A010');
+
+
+drop table customer;
+
+
+CREATE TABLE Customer (
+    CustomerID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    CustomerName VARCHAR(50) NOT NULL,
+    ContactName VARCHAR(50),
+    Country VARCHAR(50)
+);
+
+INSERT INTO Customer (CustomerName, ContactName, Country) VALUES
+('Alfreds Futterkiste', 'Maria Anders', 'Germany'),
+('Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Mexico'),
+('Antonio Moreno Taquería', 'Antonio Moreno', 'Mexico'),
+('Around the Horn', 'Thomas Hardy', 'UK'),
+('Berglunds snabbköp', 'Christina Berglund', 'Sweden'),
+('Blauer See Delikatessen', 'Hanna Moos', 'Germany'),
+('Blondel père et fils', 'Frédérique Citeaux', 'France'),
+('Bólido Comidas preparadas', 'Martín Sommer', 'Spain'),
+('Bon app', 'Laurence Lebihans', 'France'),
+('Bottom-Dollar Markets', 'Elizabeth Lincoln', 'Canada');
+
+CREATE TABLE Maal (
+    ProductID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ProductName VARCHAR(50) NOT NULL,
+    SupplierID INT,
+    Price DECIMAL(10, 2)
+);
+
+INSERT INTO Maal (ProductName, SupplierID, Price) VALUES
+('Chais', 1, 18.00),
+('Chang', 1, 19.00),
+('Aniseed Syrup', 1, 10.00),
+('Chef Anton\'s Cajun Seasoning', 2, 22.00),
+('Chef Anton\'s Gumbo Mix', 2, 21.35),
+('Grandma\'s Boysenberry Spread', 3, 25.00),
+('Uncle Bob\'s Organic Dried Pears', 3, 30.00),
+('Northwoods Cranberry Sauce', 3, 40.00),
+('Mishi Kobe Niku', 4, 97.00),
+('Ikura', 4, 31.00);
+
+CREATE TABLE Orderr (
+    OrderID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    OrderDate DATE,
+    CustomerID INT,
+    ProductID INT,
+    Quantity INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+
+show tables;
+
+INSERT INTO Orderr (OrderDate, CustomerID, ProductID, Quantity) VALUES
+('2024-07-01', 1, 1, 5),
+('2024-07-02', 2, 2, 10),
+('2024-07-03', 3, 3, 15),
+('2024-07-04', 4, 4, 20),
+('2024-07-05', 5, 5, 25),
+('2024-07-06', 6, 6, 30),
+('2024-07-07', 7, 7, 35),
+('2024-07-08', 8, 8, 40),
+('2024-07-09', 9, 9, 45),
+('2024-07-10', 10, 10, 50);
+
+
+-- 1 . simple join 
+select c.customerName , o.orderdate , p.productName
+from orderr o join customer c 
+on o.customerId = c.customerId 
+join maal p
+on o.productId = p.productId;
+
+-- 2 . Inner Join with Where Clause
+select c.customerName , o.orderdate , p.productName
+from orderr o join customer c 
+on o.customerId = c.customerId 
+join maal p
+on o.productId = p.productId
+where o.quantity > 20;
+
+-- 3 . Group By with Count
+select c.customerId , count(o.orderId)
+from orderr o join customer c
+on o.customerId = c.customerId 
+group by(c.customerId);
+
+SELECT CustomerID, COUNT(OrderID) as TotalOrders
+FROM Orderr
+GROUP BY CustomerID;
+
+-- 4 Group By with Having
+SELECT CustomerID, COUNT(OrderID) as TotalOrders
+FROM Orderr
+GROUP BY CustomerID
+having COUNT(OrderID) = 1;
+
+-- 5 Subquery in Select
+select customerName , (select count(orderId) from orderr where customerId = c.customerId) as OrderCount
+from Customer c;
+
+-- 6  Subquery with IN
+select CustomerName 
+from customer
+where customerId in(select customerId from orderr where Quantity > 20);
+
+-- 7 Order By
+select * from maal
+order by price desc;
+
+-- 8 Order By with Multiple Columns
+select * from maal
+order by supplierId asc , price desc ;
+
+-- 9 Subquery in Where Clause
+select max(quantity) from orderr;
+
+select customerId from orderr where quantity = (select max(quantity) from orderr);
+
+select customerName 
+from customer 
+where customerId = (select customerId 
+from orderr 
+where quantity = (select max(quantity) 
+from orderr));
+
+-- 10 Multiple Joins with Aggregation
+select c.customerName , count(o.orderId) as totalOrder , sum(o.Quantity * p.price) as totalSpent
+from orderr o 
+join customer c on o.customerId = c.customerId
+join maal p on o.productId = p.productId 
+group by c.customerName;
+
+-- 12 Join with Subquery
+select c.customerName , p.productName 
+from customer c 
+join (select o.customerId , o.productId from Orderr o where o.quantity > 20) as sub
+on c.customerId = sub.customerId 
+join maal p on sub.productId = p.productId;
+
+-- 13 Group By with Having and Subquery
+select o.customerId , count(o.orderId) as OrderCount
+from orderr o 
+group by (select avg(orderCount) from (select count(orderId) as orderCount from orderr group by customerId) as sub);
+
+SELECT o.CustomerID, COUNT(o.OrderID) as OrderCount
+FROM Orders o
+GROUP BY o.CustomerID
+HAVING COUNT(o.OrderID) > (SELECT AVG(OrderCount) FROM (SELECT COUNT(OrderID) as OrderCount FROM Orders GROUP BY CustomerID) as sub);
+
+-- 14 nested subqieries
+select customerName from customer
+where cutsomerId in(
+	select customerId from orderr 
+    where productId in(
+		select productId
+        from maal
+        where price > 20)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
