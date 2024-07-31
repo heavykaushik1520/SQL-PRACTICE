@@ -22,3 +22,7 @@ call conditionalSP(2);
 call loopSP();
 
 show tables;
+
+use t201;
+
+select sum_1_to_5();
