@@ -66,3 +66,10 @@ before delete on employee
 for each row
 insert into employee_backup
 values(old.id , old.name , old.age , old.salary);
+
+use t201;
+delete from employee where id = 2;
+
+select * from employee_backup;
+
+select * from employee;
