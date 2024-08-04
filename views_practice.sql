@@ -168,6 +168,75 @@ on p.supplierId = s.supplierId;
 
 select * from ProductPriceBySupplierr;
 
+-- View: Products with Minimum Price per Category
+create view minPrice as
+select categoryName , min(price) as MinPrice
+from products p join categories c
+on p.categoryId = c.categoryId
+group by categoryName;
+
+-- View: Products with Maximum Price per Supplier
+create view MaxPrice as
+select SupplierName , max(price) as MaxPrice
+from products p join suppliers s
+on
+p.supplierId = s.supplierId
+group by SupplierName;
+
+-- View: Products with Prices Below Supplier's Average
+select avg(price) from products;
+
+create view PriceBelowSupplierAvg as
+select s.supplierName , p.price from
+products p join suppliers s
+on 
+p.supplierId = s.supplierId
+where p.price < (select avg(price) from products);
+
+-- View: Product Price Changes (before and after discount)
+create view PriceBeforeAfter as
+select productName , price , price * 0.9 as AfterDiscount
+from products;
+
+-- View: Products by Supplier with Total and Average Price
+create view TotalAndAvgPrice as
+select supplierId , sum(price) as TotalPrice , avg(price) as avgPrice 
+from products 
+group by supplierId;
+
+-- View: Products by Category with Supplier Name and Price Range
+create view CategoryNameSupplierName as
+select p.ProductName , c.categoryName , s.supplierName 
+from products p 
+join categories c
+on p.categoryId = c.categoryId 
+join suppliers s 
+on p.supplierId = s.supplierId
+where 
+price between 20 and 30;
+
+-- View: Products with Supplier and Category Information
+create view InfoProductSupplierCategory as
+select p.ProductName , c.categoryName , s.supplierName 
+from products p 
+join categories c
+on p.categoryId = c.categoryId 
+join suppliers s 
+on p.supplierId = s.supplierId;
+
+-- View: Supplier Product Details with High Price Alert
+select * from products where price = (select max(price) from products);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
