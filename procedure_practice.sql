@@ -49,6 +49,21 @@ select * from products;
 -- Create a Procedure with CASE Statement
 call GetProductCategory(4);
 
+-- ---------------------------------------------------------------------------------
+
+-- Create a Procedure with WHILE Loop
+call updatePriceWithLoop(5.0);
+
+-- --------------------------------------------------------------------------------
+-- Create a Procedure with TRY...CATCH for Error Handling
+CALL SafeInsertProduct(79, 'Product A', 10, 2, 'Unit A', 99.99);
+
+
+
+
+
+
+
 
 
 
