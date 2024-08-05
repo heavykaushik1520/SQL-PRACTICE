@@ -59,6 +59,55 @@ call updatePriceWithLoop(5.0);
 CALL SafeInsertProduct(79, 'Product A', 10, 2, 'Unit A', 99.99);
 
 
+-- --------------------------------------------------------------------------------
+-- Create a Procedure with Transaction Handling
+-- Call the stored procedure
+CALL TransferStock(1, 2, 10);
+
+
+-- -------------------------------------------------------------------------------
+-- Create a Procedure to Return a Value
+
+call getTotalProduct();
+
+-- -----------------------------------------------------------------------------
+CREATE TABLE ProductLogs (
+    LogID INT AUTO_INCREMENT PRIMARY KEY,
+    ProductID INT NOT NULL,
+    NewPrice DECIMAL(10, 2) NOT NULL,
+    LogDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Create a Procedure with Nested Procedure Call
+-- Call the stored procedure
+CALL UpdateProductAndLog(79, 20.99);
+
+select * from products;
+
+-- ---------------------------------------------------------------------------------------
+-- Create a Procedure to Get Products by Supplier
+call GetProductsBySupplier(1);
+
+-- --------------------------------------------------------------------------
+-- Create a Procedure to Increase Prices Conditionally
+call ConditionalPriceIncrease(3 , 2.00);
+
+select * from Products where categoryId = 3;
+
+
+-- --------------------------------------------------------------------------
+-- Create a Procedure to Calculate Average Price by Category
+CALL GetAveragePriceByCategory(1);
+
+
+
+
+
+
+
+
+
 
 
 
