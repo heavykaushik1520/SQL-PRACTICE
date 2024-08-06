@@ -100,6 +100,35 @@ select * from Products where categoryId = 3;
 -- Create a Procedure to Calculate Average Price by Category
 CALL GetAveragePriceByCategory(1);
 
+-- ----------------------------------------------------------------------------------------------------
+CREATE TABLE student_info (
+    stud_id INT AUTO_INCREMENT PRIMARY KEY,
+    stud_code VARCHAR(50) NOT NULL,
+    stud_name VARCHAR(100) NOT NULL,
+    subject VARCHAR(100) NOT NULL,
+    marks INT NOT NULL,
+    phone VARCHAR(15) NOT NULL
+);
+
+
+INSERT INTO student_info (stud_code, stud_name, subject, marks, phone)
+VALUES
+    ('S001', 'John Doe', 'Mathematics', 85, '123-456-7890'),
+    ('S002', 'Jane Smith', 'Physics', 90, '234-567-8901'),
+    ('S003', 'Sam Brown', 'Chemistry', 78, '345-678-9012'),
+    ('S004', 'Lisa White', 'Biology', 92, '456-789-0123'),
+    ('S005', 'Tom Clark', 'English', 88, '567-890-1234'),
+	('S006', 'Emily Davis', 'History', 81, '678-901-2345'),
+    ('S007', 'Michael Wilson', 'Geography', 89, '789-012-3456'),
+    ('S008', 'Sarah Miller', 'Physics', 93, '890-123-4567'),
+    ('S009', 'David Anderson', 'Mathematics', 87, '901-234-5678'),
+    ('S010', 'Laura Jackson', 'Chemistry', 82, '012-345-6789');
+    
+-- procedure without parameter
+call get_merit_student();
+
+
+
 
 
 
