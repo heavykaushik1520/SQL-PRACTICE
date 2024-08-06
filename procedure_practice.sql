@@ -1,3 +1,5 @@
+call GetProductCategory(1);
+
 use practice;
 
 show tables;
@@ -56,13 +58,13 @@ call updatePriceWithLoop(5.0);
 
 -- --------------------------------------------------------------------------------
 -- Create a Procedure with TRY...CATCH for Error Handling
-CALL SafeInsertProduct(79, 'Product A', 10, 2, 'Unit A', 99.99);
+CALL SafeInsertProduct(80, 'Product b', 10, 2, 'Unit A', 99.99);
 
 
 -- --------------------------------------------------------------------------------
 -- Create a Procedure with Transaction Handling
 -- Call the stored procedure
-CALL TransferStock(1, 2, 10);
+CALL TransferStock(2, 4, 10);
 
 
 -- -------------------------------------------------------------------------------
@@ -126,27 +128,3 @@ VALUES
     
 -- procedure without parameter
 call get_merit_student();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
