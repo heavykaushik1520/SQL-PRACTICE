@@ -23,3 +23,26 @@ call deleteByCat(1);
 
 -- 6. Cursor to Find Products Below a Price
 call selectProductBelowPrice(100.00); 
+
+-- 7. Cursor to List Products from a Specific Supplier
+call SelectProductBySupplierId(25);
+
+-- 8. Cursor to Count Products in Each Category
+call countProductInEachCategory();
+
+-- 9. Cursor to Update Units of a Specific Category
+select * from products where categoryId = 3;
+CALL UpdateUnitsByCatId(3, '45 boxes ');
+
+-- 10 Cursor to List Product Names in Alphabetical Order
+call SelectProductAlphabetically();
+
+-- 11 Cursor to Calculate Average Price by Category
+call AvgPriceByCat(2);
+
+select avg(price) from products where categoryId = 2;
+
+-- 12  Cursor to List Products and Their Prices
+call productsAndPrice();
+
+
