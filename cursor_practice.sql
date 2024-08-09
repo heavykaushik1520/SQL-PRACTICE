@@ -45,4 +45,22 @@ select avg(price) from products where categoryId = 2;
 -- 12  Cursor to List Products and Their Prices
 call productsAndPrice();
 
+drop table employee;
+
+CREATE TABLE employee (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(50),
+    phone_number VARCHAR(50),
+    hire_date DATE,
+    job_id INT,
+    salary FLOAT
+);
+
+show tables;
+
+desc employee;
+
+
 
