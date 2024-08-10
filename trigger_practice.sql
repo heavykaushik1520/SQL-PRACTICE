@@ -50,5 +50,34 @@ insert into employee
 values
 ('Alexander', 'Actor', '2020-10-012', -13); 
 
+show  triggers;
+
+use practice;
+
+-- Trigger on Insert - Automatically Set Product Price:
+
+-- This trigger automatically sets the price to 10.00 if the inserted price is 0 or null.
+
+delimiter $$
+create trigger set_default_price 
+before insert on product
+for each row
+begin
+	IF NEW.Price IS NULL OR NEW.Price = 0 THEN
+        SET NEW.Price = 10.00;
+    END IF;
+END $$
+delimiter ;
+
+
+-- Trigger on Update - Log Price Changes:
+
+-- This trigger logs changes in the Price column into a separate table called PriceChanges.
+
+delimiter $$
+
+ 
+
+
 
 	
