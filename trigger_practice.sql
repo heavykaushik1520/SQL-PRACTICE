@@ -76,6 +76,37 @@ delimiter ;
 
 delimiter $$
 
+
+-- Trigger on Delete - Archive Product:
+
+-- This trigger moves a product record to an ArchivedProducts table before it is deleted.
+
+CREATE TABLE ArchivedProducts LIKE Products;
+
+CREATE TRIGGER archive_product
+BEFORE DELETE ON Products
+FOR EACH ROW
+BEGIN
+    INSERT INTO ArchivedProducts SELECT * FROM Products WHERE ProductID = OLD.ProductID;
+END;
+
+
+-- ----------------------------------------------------------------------------------------
+-- Trigger on Insert - Ensure Unique Product Name:
+
+-- This trigger prevents the insertion of a product with a duplicate ProductName.
+
+CREATE TRIGGER unique_product_name
+BEFORE INSERT ON Products
+FOR EACH ROW
+BEGIN
+    IF (SELECT COUNT(*) FROM Products WHERE ProductName = NEW.ProductName) > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Duplicate Product Name';
+    END IF;
+END;
+
+
  
 
 
