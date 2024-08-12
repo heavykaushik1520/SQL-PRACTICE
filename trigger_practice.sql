@@ -107,6 +107,41 @@ BEGIN
 END;
 
 
+-- --------------------------------------------------------------------------------------
+-- Trigger on Update - Prevent Price Drop:
+-- This trigger prevents the price of a product from being reduced by more than 10%.
+
+create trigger prevent_large_price_drop 
+before update on products
+for each row 
+begin 
+	if NEW.price < OLD.price * 0.9 then 
+		signal sqlstate '45000'
+        set message_text = 'Price drop exceeds 10% limit';
+	end if;
+end;
+
+-- ----------------------------------------------------------------------------------
+-- Trigger on Insert - Calculate Total Cost (Price + Tax):
+
+-- This trigger calculates a TotalCost that includes a 5% tax on the price and stores it in a new column.
+DROP TABLE IF EXISTS ArchivedProducts;
+alter table products add column TotalCost decimal(10 , 2);
+
+
+-- ----------------------------------------------------------------------------------
+-- Trigger on Update - Track Supplier Changes:
+-- This trigger logs any changes to the SupplierID in a SupplierChanges table.
+CREATE TABLE SupplierChanges (
+    ChangeID INT AUTO_INCREMENT PRIMARY KEY,
+    ProductID INT,
+    OldSupplierID INT,
+    NewSupplierID INT,
+    ChangeDate DATETIME
+);
+
+
+
  
 
 
