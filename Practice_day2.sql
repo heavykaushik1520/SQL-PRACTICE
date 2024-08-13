@@ -128,6 +128,26 @@ select * from bank;
 call DeleteById(22);
 
 
+-- Create a procedure to update a bank's CEO name:
+call updateCeoName(2 , "Kaushik");
+
+-- Create a procedure to get branch details by bank name:
+CALL GetBranchDetails('National Bank');
+
+
+-- Create a procedure to transfer a branch to another bank:
+call TransferBranch(1 , 5);
+
+-- Call a procedure to insert a new bank:
+CALL AddNewBank('Future Bank', 'Miami', 2024, 'Emma Stone', 600000000.00);
+
+
+-- 
+
+
+
+
+
 
 
 
