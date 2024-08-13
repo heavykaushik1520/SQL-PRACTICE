@@ -117,6 +117,10 @@ where bankId = (select BankId from bank where BankName = "Prime Bank");
 -- -----------------------------------------------------------------------------
 
 -- Procedure 
+CALL AddNewBank('BankName', 'HeadOfficeLocation', 2023, 'CEOName', 15000000.00);
+
+CALL AddNewBank('National Bank', 'New York', 1985, 'John Doe', 300000000.00);
+
 
 
 
