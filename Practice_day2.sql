@@ -121,6 +121,15 @@ CALL AddNewBank('BankName', 'HeadOfficeLocation', 2023, 'CEOName', 15000000.00);
 
 CALL AddNewBank('National Bank', 'New York', 1985, 'John Doe', 300000000.00);
 
+select * from bank;
+
+-- ---------------------------------------
+-- Create a procedure to delete a bank by its ID:
+call DeleteById(22);
+
+
+
+
 
 
 
