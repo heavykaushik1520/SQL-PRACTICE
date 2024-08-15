@@ -142,7 +142,35 @@ call TransferBranch(1 , 5);
 CALL AddNewBank('Future Bank', 'Miami', 2024, 'Emma Stone', 600000000.00);
 
 
--- 
+-- Create a procedure to calculate the total assets of all banks:
+set @total_assets = 0;
+call calculateTotalAssets(@total_assets);
+select @total_assets;
+
+-- Create a procedure to insert a new branch:
+call insertNewBranch(10, 'National Bank - Mission', 'Devrukh', 'Chris Pratt', '556-4567');
+select * from branch;
+
+-- Call a procedure to get branch details by bank name:
+call getBranchDetails("Prime Bank");
+
+-- -----------------------------------------------------------------------------------------
+-- Cursor
+-- Create a procedure using a cursor to list all banks:
+call ListAllBank();
+
+-- Create a procedure using a cursor to update the total assets for all banks by 10%:
+call UpdateAssets();
+
+select * from Bank;
+
+
+
+
+
+
+ 
+
 
 
 
