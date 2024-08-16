@@ -164,7 +164,11 @@ call UpdateAssets();
 
 select * from Bank;
 
+-- Create a procedure using a cursor to calculate the average assets for banks established after 2000:
+set @assets = 0;
+call AvgAssetsAfter2000(@assets);
 
+select @assets;
 
 
 
