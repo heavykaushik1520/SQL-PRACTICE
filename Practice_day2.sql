@@ -176,6 +176,9 @@ call ListBranchesForBank(1);
 -- Create a procedure using a cursor to increase the assets of banks with more than 3 branches by 5%:
 call IncreaseAssetsForLargeBank();
 
+-- Create a procedure using a cursor to copy data from one table to another:
+call CopyBankData();
+
 
 
 
