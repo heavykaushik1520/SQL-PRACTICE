@@ -170,6 +170,13 @@ call AvgAssetsAfter2000(@assets);
 
 select @assets;
 
+-- Create a procedure using a cursor to list all branches for a specific bank:
+call ListBranchesForBank(1);
+
+-- Create a procedure using a cursor to increase the assets of banks with more than 3 branches by 5%:
+call IncreaseAssetsForLargeBank();
+
+
 
 
 
