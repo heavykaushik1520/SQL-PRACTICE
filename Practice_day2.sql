@@ -179,6 +179,18 @@ call IncreaseAssetsForLargeBank();
 -- Create a procedure using a cursor to copy data from one table to another:
 call CopyBankData();
 
+-- Create a procedure using a cursor to delete branches in a specific location:
+call DeleteBranchesInLocation(2);
+
+-- Create a procedure using a cursor to list banks with assets greater than a specified amount:
+call ListBanksWithAssetsGreaterThan(10);
+
+-- JOINS ----------------------------------------------------------------------------------
+
+
+
+
+
 
 
 
