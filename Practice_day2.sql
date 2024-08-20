@@ -187,6 +187,24 @@ call ListBanksWithAssetsGreaterThan(10);
 
 -- JOINS ----------------------------------------------------------------------------------
 
+-- Basic INNER JOIN to list all branches with their respective bank names:
+select b.BankName , br.branchName
+from bank b inner join branch br
+on b.BankId = br.BankId;
+
+-- LEFT JOIN to show all banks and their branches (including banks without branches):
+select b.BankName , br.BranchName 
+from bank b left join branch br 
+on b.BankId = br.BankId;
+
+-- RIGHT JOIN to list all branches and their respective banks (including branches without associated banks):
+select br.BranchName , b.BankName
+from bank b right join branch br
+on b.BankId = br.BankId;
+
+
+
+
 
 
 
