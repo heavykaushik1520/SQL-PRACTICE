@@ -1,5 +1,8 @@
 use practice;
 
+show tables;
+
+
 /*
 	CREATE TRIGGER trigger_name    
     (AFTER | BEFORE) (INSERT | UPDATE | DELETE)  
@@ -141,7 +144,7 @@ CREATE TABLE SupplierChanges (
 );
 
 
-
+select * from student_info;
  
 
 
