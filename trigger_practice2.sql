@@ -94,8 +94,38 @@ end $$
 
 
 delimiter ;
+-- --------------------------------------------------
+
+CREATE TABLE student_log (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    action VARCHAR(50),
+    stud_id INT,
+    timestamp DATETIME
+);
 
 -- ----------------------------------------------------
+-- 7. Insert a New Student (Trigger Activation)
+INSERT INTO student_info (stud_code, stud_name, subject, marks, phone)
+VALUES ('S011', 'Nina Harris', 'History', 85, '234-567-7890');
+
+select * from student_info;
+
+-- ----------------------------------------------------
+
+-- 8. Update Marks for a Student (Trigger Activation)
+UPDATE student_info
+SET marks = 95
+WHERE stud_id = 1;
+
+-- ---------------------------------------------------
+
+show triggers;
+
+SHOW TABLES IN practice;    
+
+show tables from practice;
+
+
 
 
 
