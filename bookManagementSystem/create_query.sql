@@ -13,6 +13,10 @@ id int primary key ,
 name varchar(20) not null ,
 age int not null );
 
+alter table abc rename column age to my_age;
+
+desc abc;
+
 create table xyz(
 u_id int primary key ,
 name varchar(20),
